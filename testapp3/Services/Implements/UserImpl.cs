@@ -15,6 +15,7 @@ namespace testapp3.Services.Implements
         EUser user = new EUser();
         EInsideUser insideUser = new EInsideUser();
         ETeamOwner eTeamOwner=new ETeamOwner();
+        EPlayer ePlayer=new EPlayer();
         DefaultResponse defaultResponse=new DefaultResponse();
 
         public UserImpl(IUserRepo userRepo,ITeam team,ITeamRepo teamRepo)
@@ -35,6 +36,28 @@ namespace testapp3.Services.Implements
             {
                 return defaultResponse.setResponse(0, "<server side error> user not saved , please try again later ", false);
             }
+        }
+
+        public DefaultResponse addPleyer(PlayerPayload player)
+        {
+            long savedUserId = addUserDetails(player.user).id;
+            if (savedUserId > 0)
+            {
+                long savedPlayerId=userRepo.AddPlayer(ePlayer.setPlayerDetails(player, userRepo.GetUserById(savedUserId)));
+                if(savedPlayerId > 0)
+                {
+                    return defaultResponse.setResponse(savedPlayerId,"Player Saved Success 🎉🎉🎉",true);
+                }
+                else
+                {
+                    return defaultResponse.setResponse(0,"<Internal Server Error >player not saved, Somthing Went Wrong Please Try Agin later",false);
+                }
+            }
+            else
+            {
+                return defaultResponse.setResponse(0, "<Internal Server Error >user not saved, Somthing Went Wrong Please Try Agin later", false);
+            }
+            
         }
 
         public DefaultResponse addTeamOwner(TeamOwnerPayload teamOwner)

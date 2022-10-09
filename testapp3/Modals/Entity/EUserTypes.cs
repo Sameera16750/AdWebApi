@@ -36,12 +36,14 @@ namespace testapp3.Modals.Entity
 
         }
 
-        public EUserTypes(long id, string type, string createdDate, string lastUpdate, int status, List<EUser> users)
+        public EUserTypes(long id, string type, string createdDate, string lastUpdate, int isDashBoardEnabled, int isViewPlayerEnabled, int status, List<EUser> users)
         {
             this.id = id;
             this.type = type;
             this.createdDate = createdDate;
             this.lastUpdate = lastUpdate;
+            this.isDashBoardEnabled = isDashBoardEnabled;
+            this.isViewPlayerEnabled = isViewPlayerEnabled;
             this.status = status;
             Users = users;
         }
@@ -52,6 +54,8 @@ namespace testapp3.Modals.Entity
 
             eUserTypes.id=userType.id;
             eUserTypes.type=userType.type;
+            eUserTypes.isDashBoardEnabled=userType.isDashBoardEnabled;
+            eUserTypes.isViewPlayerEnabled=userType.isViewPlayerEnabled;
             eUserTypes.createdDate=userType.createdDate;
             eUserTypes.lastUpdate = userType.lastUpdate;
             eUserTypes.status = userType.status;

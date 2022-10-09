@@ -33,5 +33,11 @@ namespace testapp3.Controllers
         {
             return user.addTeamOwner(teamOwner);
         }
+
+        [HttpPost("addPlayer")]
+        public DefaultResponse AddPlayer([FromBody]PlayerPayload player)
+        {
+            return user.addPleyer(player);
+        }
     }
 }
