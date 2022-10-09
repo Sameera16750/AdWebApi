@@ -27,5 +27,11 @@ namespace testapp3.Controllers
         {
             return user.addInternalUser(internalUser);
         }
+
+        [HttpPost("addTeamOwner")]
+        public DefaultResponse AddTeamOwner([FromBody]TeamOwnerPayload teamOwner)
+        {
+            return user.addTeamOwner(teamOwner);
+        }
     }
 }

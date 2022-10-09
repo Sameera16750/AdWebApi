@@ -9,5 +9,6 @@ namespace testapp3.Repositories.Interfaces
         public EUserTypes getUsertypeById(long id);
         public long AddUser(EUser user);
         public EUser GetUserById(long id);
+        public long AddTeamOwner(ETeamOwner owner);
     }
 }

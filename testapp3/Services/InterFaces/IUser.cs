@@ -7,5 +7,6 @@ namespace testapp3.Services.InterFaces
         public DefaultResponse addUserType(UserTypePayload userType);
         public DefaultResponse addInternalUser(InternalUserPayload internalUser);
         public DefaultResponse addUserDetails(UserPayload userDetails);
+        public DefaultResponse addTeamOwner(TeamOwnerPayload teamOwner);
     }
 }

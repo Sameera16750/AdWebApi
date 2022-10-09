@@ -29,6 +29,13 @@ namespace testapp3.Repositories.Implements
             return eInsideUser.id;
         }
 
+        public long AddTeamOwner(ETeamOwner owner)
+        {
+            _authContext.teamOwners.Add(owner);
+            _authContext.SaveChanges();
+            return owner.id;
+        }
+
         public long AddUser(EUser user)
         {
             _authContext.users.Add(user);

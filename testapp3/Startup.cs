@@ -39,6 +39,9 @@ namespace testapp3
 
             services.AddTransient<IUser,UserImpl>();
             services.AddTransient<IUserRepo,UserRepoImpl>();
+
+            services.AddTransient<ITeam, TeamImpl>();
+            services.AddTransient<ITeamRepo, TeamRepoImpl>();
             //end of dependency injection
 
             services.AddControllers();

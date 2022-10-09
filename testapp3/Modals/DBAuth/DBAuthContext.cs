@@ -13,5 +13,7 @@ namespace testapp3.Modals.DBAuth
         public DbSet<EUserTypes> userTypes { get; set; }
         public DbSet<EUser> users { get; set; }
         public DbSet<EInsideUser> insideUsers { get; set; }
+        public DbSet<ETeamOwner>teamOwners { get; set; }
+        public DbSet<ETeam>teams { get; set; }  
     }
 }
