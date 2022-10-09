@@ -12,7 +12,7 @@ namespace testapp3.Payloads
 
         public string password { get; set; }
 
-        public UserTypePayload type { get; set; }
+        public long uTypeId { get; set; }
 
         public string createdDate { get; set; }
 
@@ -25,12 +25,12 @@ namespace testapp3.Payloads
 
         }
 
-        public UserPayload(long id, string name, string password, UserTypePayload type, string createdDate, string lastupdate, int status)
+      public UserPayload(long id, string name, string password, long uTypeId, string createdDate, string lastupdate, int status)
         {
             this.id = id;
             this.name = name;
             this.password = password;
-            this.type = type;
+            this.uTypeId = uTypeId;
             this.createdDate = createdDate;
             this.lastupdate = lastupdate;
             this.status = status;

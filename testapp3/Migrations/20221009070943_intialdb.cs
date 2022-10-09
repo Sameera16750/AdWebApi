@@ -3,7 +3,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace testapp3.Migrations
 {
-    public partial class userTables : Migration
+    public partial class intialdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,9 @@ namespace testapp3.Migrations
                     type = table.Column<string>(type: "text", nullable: false),
                     createdDate = table.Column<string>(type: "text", nullable: false),
                     lastUpdate = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false)
+                    isDashBoardEnabled = table.Column<int>(type: "int", nullable: false),
+                    isViewPlayerEnabled = table.Column<int>(type: "int", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,9 +68,9 @@ namespace testapp3.Migrations
                 name: "T_INSIDE_USERS",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
                     contactNo = table.Column<string>(type: "text", nullable: false),
                     address = table.Column<string>(type: "text", nullable: false),
                     userid = table.Column<long>(type: "bigint", nullable: true),
@@ -78,7 +80,7 @@ namespace testapp3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_INSIDE_USERS", x => x.Id);
+                    table.PrimaryKey("PK_T_INSIDE_USERS", x => x.id);
                     table.ForeignKey(
                         name: "FK_T_INSIDE_USERS_T_USER_userid",
                         column: x => x.userid,

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using testapp3.Payloads;
 
 namespace testapp3.Modals.Entity
 {
@@ -40,6 +41,20 @@ namespace testapp3.Modals.Entity
             this.createdDate = createdDate;
             this.lastupdate = lastupdate;
             this.status = status;
+        }
+
+        public EUser setUserDetails(UserPayload user,EUserTypes eUserTypes)
+        {
+            EUser eUser = new EUser();
+            eUser.id = user.id;
+            eUser.name= user.name;
+            eUser.password= user.password;
+            eUser.type = eUserTypes;
+            eUser.createdDate = user.createdDate;
+            eUser.lastupdate = user.lastupdate;
+            eUser.status = user.status;
+
+            return eUser;
         }
     }
 }

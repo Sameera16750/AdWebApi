@@ -16,10 +16,16 @@ namespace testapp3.Controllers
             this.user = user;
         }
 
-        [HttpPost(Name ="addUserType")]
+        [HttpPost("addUserType")]
         public DefaultResponse AddUserType([FromBody]UserTypePayload userType)
         {
             return user.addUserType(userType);
+        }
+
+        [HttpPost("addInternalUser")]
+        public DefaultResponse AddinternalUser([FromBody]InternalUserPayload internalUser)
+        {
+            return user.addInternalUser(internalUser);
         }
     }
 }

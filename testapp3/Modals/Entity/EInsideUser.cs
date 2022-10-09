@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using testapp3.Payloads;
 
 namespace testapp3.Modals.Entity
 {
@@ -7,10 +8,10 @@ namespace testapp3.Modals.Entity
     public class EInsideUser
     {
         [Key]
-        public long Id { get; set; }
+        public long id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string name { get; set; }
 
         [Required]
         public string contactNo { get; set; }
@@ -37,14 +38,30 @@ namespace testapp3.Modals.Entity
 
         public EInsideUser(long id, string name, string contactNo, string address, EUser user, string createdDate, string lastUpdate, int status)
         {
-            Id = id;
-            Name = name;
+            this.id = id;
+            this.name = name;
             this.contactNo = contactNo;
             this.address = address;
             this.user = user;
             this.createdDate = createdDate;
             this.lastUpdate = lastUpdate;
             this.status = status;
+        }
+
+        public EInsideUser setEInsideUser(InternalUserPayload internalUser, EUser eUser)
+        {
+            EInsideUser eInsideUser = new EInsideUser();
+            eInsideUser.id = internalUser.id;
+            eInsideUser.name = internalUser.name;
+            eInsideUser.contactNo = internalUser.contactNo;
+            eInsideUser.address = internalUser.address;
+            eInsideUser.user = eUser;
+            eInsideUser.createdDate = internalUser.createdDate;
+            eInsideUser.lastUpdate = internalUser.lastUpdate;
+            eInsideUser.status = internalUser.status;
+
+            return eInsideUser;
+
         }
     }
 }

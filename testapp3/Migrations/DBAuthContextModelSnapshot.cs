@@ -40,13 +40,9 @@ namespace testapp3.Migrations
 
             modelBuilder.Entity("testapp3.Modals.Entity.EInsideUser", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("address")
                         .IsRequired()
@@ -64,13 +60,17 @@ namespace testapp3.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.Property<long?>("userid")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("userid");
 
@@ -132,9 +132,8 @@ namespace testapp3.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.Property<string>("type")
                         .IsRequired()
