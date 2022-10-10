@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using testapp3.Payloads;
 using testapp3.Services.InterFaces;
 
@@ -20,6 +21,12 @@ namespace testapp3.Controllers
         public DefaultResponse AddUserType([FromBody]UserTypePayload userType)
         {
             return user.addUserType(userType);
+        }
+
+        [HttpGet("getAllActiveUserTypes")]
+        public List<UserTypePayload> GetAllActiveUserTypes()
+        {
+            return user.getAllActiveUserTypes();
         }
 
         [HttpPost("addInternalUser")]

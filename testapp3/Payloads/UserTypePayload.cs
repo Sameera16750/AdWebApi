@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using testapp3.Modals.Entity;
 
 namespace testapp3.Payloads
 {
@@ -32,6 +34,29 @@ namespace testapp3.Payloads
             this.isDashBoardEnabled = isDashBoardEnabled;
             this.isViewPlayerEnabled = isViewPlayerEnabled;
             this.status = status;
+        }
+
+        public UserTypePayload setUserTypeDetail(EUserTypes eUserTypes)
+        {
+            UserTypePayload userTypePayload = new UserTypePayload();
+            userTypePayload.id = eUserTypes.id;
+            userTypePayload.type = eUserTypes.type;
+            userTypePayload.createdDate = eUserTypes.createdDate;
+            userTypePayload.lastUpdate = eUserTypes.lastUpdate;
+            userTypePayload.isDashBoardEnabled = eUserTypes.isDashBoardEnabled;
+            userTypePayload.isViewPlayerEnabled = eUserTypes.isViewPlayerEnabled;
+            userTypePayload.status = eUserTypes.status;
+            return userTypePayload;
+        }
+        
+        public List<UserTypePayload> setUserTypeList(List<EUserTypes> eUserTypes)
+        {
+            List<UserTypePayload> userTypes=new List<UserTypePayload> ();
+            for(int i = 0; i < eUserTypes.Count; i++)
+            {
+                userTypes.Add(setUserTypeDetail(eUserTypes[i]));
+            }
+            return userTypes;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using System.Collections.Generic;
+using System.Linq;
 using testapp3.Modals.DBAuth;
 using testapp3.Modals.Entity;
 using testapp3.Repositories.Interfaces;
@@ -48,6 +50,11 @@ namespace testapp3.Repositories.Implements
             _authContext.users.Add(user);
             _authContext.SaveChanges();
             return user.id;
+        }
+
+        public List<EUserTypes> GetAllActiveUserTypes()
+        {
+            return (from utype in _authContext.userTypes where utype.status>0 select utype).ToList();
         }
 
         public EUser GetUserById(long id)

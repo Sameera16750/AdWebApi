@@ -32,6 +32,9 @@ namespace testapp3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //for allow origin
+            services.AddCors();
+
             services.AddDbContext<DBAuthContext>(options => options.UseMySQL(Configuration.GetConnectionString("default")));
             //for dependency injection
             services.AddTransient<IEmployee,EmployeeImpl>();
@@ -55,6 +58,12 @@ namespace testapp3
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //for allow origin
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

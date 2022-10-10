@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using testapp3.Modals.Entity;
 using testapp3.Payloads;
 using testapp3.Repositories.Interfaces;
@@ -17,6 +18,7 @@ namespace testapp3.Services.Implements
         ETeamOwner eTeamOwner=new ETeamOwner();
         EPlayer ePlayer=new EPlayer();
         DefaultResponse defaultResponse=new DefaultResponse();
+        UserTypePayload uTypePayload=new UserTypePayload();
 
         public UserImpl(IUserRepo userRepo,ITeam team,ITeamRepo teamRepo)
         {
@@ -120,6 +122,19 @@ namespace testapp3.Services.Implements
             else
             {
                 return defaultResponse.setResponse(0, "< This ServerSide error > something went wrong please try again later", true);
+            }
+        }
+
+        public List<UserTypePayload> getAllActiveUserTypes()
+        {
+            List<EUserTypes> eUserTypeList = userRepo.GetAllActiveUserTypes();
+            if (eUserTypeList.Count > 0)
+            {
+                return uTypePayload.setUserTypeList(eUserTypeList);
+            }
+            else
+            {
+                return null;
             }
         }
     }
