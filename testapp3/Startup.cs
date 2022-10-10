@@ -45,6 +45,9 @@ namespace testapp3
 
             services.AddTransient<ITeam, TeamImpl>();
             services.AddTransient<ITeamRepo, TeamRepoImpl>();
+
+            services.AddTransient<ITrophy, TrophyImpl>();
+            services.AddTransient<ITrophyRepo,TrophyRepoImpl>();
             //end of dependency injection
 
             services.AddControllers();
