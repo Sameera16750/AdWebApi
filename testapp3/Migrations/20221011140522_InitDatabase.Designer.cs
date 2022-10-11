@@ -9,8 +9,8 @@ using testapp3.Modals.DBAuth;
 namespace testapp3.Migrations
 {
     [DbContext(typeof(DBAuthContext))]
-    [Migration("20221009102130_initPlayerTables")]
-    partial class initPlayerTables
+    [Migration("20221011140522_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,6 +132,38 @@ namespace testapp3.Migrations
                     b.ToTable("T_PLAYER");
                 });
 
+            modelBuilder.Entity("testapp3.Modals.Entity.EPlayerWithTrophy", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("createdDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("lastUpdate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long?>("playerid")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("trophyid")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("playerid");
+
+                    b.HasIndex("trophyid");
+
+                    b.ToTable("T_PAYER_WITH_TROPHY");
+                });
+
             modelBuilder.Entity("testapp3.Modals.Entity.ETeam", b =>
                 {
                     b.Property<long>("id")
@@ -214,6 +246,40 @@ namespace testapp3.Migrations
                     b.HasIndex("userid");
 
                     b.ToTable("T_TEAM_OWNER");
+                });
+
+            modelBuilder.Entity("testapp3.Modals.Entity.ETrophy", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("createdDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("endDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("lastUpdate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("startDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("T_TROPHY");
                 });
 
             modelBuilder.Entity("testapp3.Modals.Entity.EUser", b =>
@@ -299,6 +365,21 @@ namespace testapp3.Migrations
                         .HasForeignKey("userid");
 
                     b.Navigation("user");
+                });
+
+            modelBuilder.Entity("testapp3.Modals.Entity.EPlayerWithTrophy", b =>
+                {
+                    b.HasOne("testapp3.Modals.Entity.EPlayer", "player")
+                        .WithMany()
+                        .HasForeignKey("playerid");
+
+                    b.HasOne("testapp3.Modals.Entity.ETrophy", "trophy")
+                        .WithMany()
+                        .HasForeignKey("trophyid");
+
+                    b.Navigation("player");
+
+                    b.Navigation("trophy");
                 });
 
             modelBuilder.Entity("testapp3.Modals.Entity.ETeamOwner", b =>

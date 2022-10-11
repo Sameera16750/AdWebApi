@@ -130,6 +130,38 @@ namespace testapp3.Migrations
                     b.ToTable("T_PLAYER");
                 });
 
+            modelBuilder.Entity("testapp3.Modals.Entity.EPlayerWithTrophy", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("createdDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("lastUpdate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long?>("playerid")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("trophyid")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("playerid");
+
+                    b.HasIndex("trophyid");
+
+                    b.ToTable("T_PAYER_WITH_TROPHY");
+                });
+
             modelBuilder.Entity("testapp3.Modals.Entity.ETeam", b =>
                 {
                     b.Property<long>("id")
@@ -331,6 +363,21 @@ namespace testapp3.Migrations
                         .HasForeignKey("userid");
 
                     b.Navigation("user");
+                });
+
+            modelBuilder.Entity("testapp3.Modals.Entity.EPlayerWithTrophy", b =>
+                {
+                    b.HasOne("testapp3.Modals.Entity.EPlayer", "player")
+                        .WithMany()
+                        .HasForeignKey("playerid");
+
+                    b.HasOne("testapp3.Modals.Entity.ETrophy", "trophy")
+                        .WithMany()
+                        .HasForeignKey("trophyid");
+
+                    b.Navigation("player");
+
+                    b.Navigation("trophy");
                 });
 
             modelBuilder.Entity("testapp3.Modals.Entity.ETeamOwner", b =>

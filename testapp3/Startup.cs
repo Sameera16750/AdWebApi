@@ -48,6 +48,8 @@ namespace testapp3
 
             services.AddTransient<ITrophy, TrophyImpl>();
             services.AddTransient<ITrophyRepo,TrophyRepoImpl>();
+
+            services.AddTransient<IPlayerRepo, PlayerRepoImpl>();
             //end of dependency injection
 
             services.AddControllers();

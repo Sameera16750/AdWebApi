@@ -21,5 +21,11 @@ namespace testapp3.Controllers
         {
             return trophy.AddTrophy(trophyPayload);
         }
+        
+        [HttpPost("playerTrophyRequest")]
+        public DefaultResponse playerRequestTrophy([FromBody]PlayerRequestTrophyPayload playerRequest)
+        {
+            return trophy.PlayerRequestTrophy(playerRequest);
+        }
     }
 }

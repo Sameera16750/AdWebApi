@@ -19,5 +19,17 @@ namespace testapp3.Repositories.Implements
             _authContext.SaveChanges();
             return eTrophy.id;
         }
+
+        public ETrophy GetTrophyById(long id)
+        {
+            return _authContext.trophies.Find(id);
+        }
+
+        public long PlayerRequestTrophy(EPlayerWithTrophy playerWithTrophy)
+        {
+            _authContext.playerWithTrophies.Add(playerWithTrophy);
+            _authContext.SaveChanges();
+            return playerWithTrophy.id;
+        }
     }
 }

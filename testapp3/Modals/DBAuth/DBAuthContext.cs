@@ -17,6 +17,7 @@ namespace testapp3.Modals.DBAuth
         public DbSet<ETeam>teams { get; set; }  
         public DbSet<EPlayer> player { get; set; }
         public DbSet<ETrophy> trophies { get; set; }
+        public DbSet<EPlayerWithTrophy>playerWithTrophies { get; set; }
 
     }
 }
