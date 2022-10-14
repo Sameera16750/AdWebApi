@@ -23,9 +23,21 @@ namespace testapp3.Controllers
         }
         
         [HttpPost("playerTrophyRequest")]
-        public DefaultResponse playerRequestTrophy([FromBody]PlayerRequestTrophyPayload playerRequest)
+        public DefaultResponse PlayerRequestTrophy([FromBody]PlayerRequestTrophyPayload playerRequest)
         {
             return trophy.PlayerRequestTrophy(playerRequest);
+        }
+
+        [HttpPost("teamOwnerTrophyRequest")]
+        public DefaultResponse OwnerRequestTrophy([FromBody]TrophyWithTeamPayload trophyWithTeam)
+        {
+            return trophy.OwnerRequestTrophy(trophyWithTeam);
+        }
+
+        [HttpPost("updateOwnertrophyRequest")]
+        public DefaultResponse UpdateOwnerRequestTrophy([FromBody]TrophyWithTeamPayload trophyWithTeam)
+        {
+            return trophy.UpdateOwnerRequestTrophy(trophyWithTeam);
         }
     }
 }

@@ -25,11 +25,25 @@ namespace testapp3.Repositories.Implements
             return _authContext.trophies.Find(id);
         }
 
-        public long PlayerRequestTrophy(EPlayerWithTrophy playerWithTrophy)
+        public long AddPlayerRequestTrophy(EPlayerWithTrophy playerWithTrophy)
         {
             _authContext.playerWithTrophies.Add(playerWithTrophy);
             _authContext.SaveChanges();
             return playerWithTrophy.id;
+        }
+
+        public long AddTrophyWithTeam(ETrophyWithTeam trophyWithTeam)
+        {
+            _authContext.trophyWithTeams.Add(trophyWithTeam);
+            _authContext.SaveChanges() ;
+            return trophyWithTeam.id;
+        }
+
+        public long UpdateTrophyWithTeam(ETrophyWithTeam trophyWithTeam)
+        {
+            _authContext.trophyWithTeams.Update(trophyWithTeam);
+            _authContext.SaveChanges () ;
+            return trophyWithTeam.id;
         }
     }
 }

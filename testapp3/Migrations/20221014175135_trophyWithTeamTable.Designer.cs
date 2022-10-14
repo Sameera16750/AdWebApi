@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using testapp3.Modals.DBAuth;
 
 namespace testapp3.Migrations
 {
     [DbContext(typeof(DBAuthContext))]
-    partial class DBAuthContextModelSnapshot : ModelSnapshot
+    [Migration("20221014175135_trophyWithTeamTable")]
+    partial class trophyWithTeamTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,41 +282,6 @@ namespace testapp3.Migrations
                     b.ToTable("T_TROPHY");
                 });
 
-            modelBuilder.Entity("testapp3.Modals.Entity.ETrophyWithTeam", b =>
-                {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("createdDate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("lastUpdate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("maxPrice")
-                        .HasColumnType("double");
-
-                    b.Property<int>("status")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("teamid")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("trophyid")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("teamid");
-
-                    b.HasIndex("trophyid");
-
-                    b.ToTable("T_TEAM_WITH_TROPHY");
-                });
-
             modelBuilder.Entity("testapp3.Modals.Entity.EUser", b =>
                 {
                     b.Property<long>("id")
@@ -428,21 +395,6 @@ namespace testapp3.Migrations
                     b.Navigation("team");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("testapp3.Modals.Entity.ETrophyWithTeam", b =>
-                {
-                    b.HasOne("testapp3.Modals.Entity.ETeam", "team")
-                        .WithMany()
-                        .HasForeignKey("teamid");
-
-                    b.HasOne("testapp3.Modals.Entity.ETrophy", "trophy")
-                        .WithMany()
-                        .HasForeignKey("trophyid");
-
-                    b.Navigation("team");
-
-                    b.Navigation("trophy");
                 });
 
             modelBuilder.Entity("testapp3.Modals.Entity.EUser", b =>

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using testapp3.Modals.DBAuth;
 
 namespace testapp3.Migrations
 {
     [DbContext(typeof(DBAuthContext))]
-    partial class DBAuthContextModelSnapshot : ModelSnapshot
+    [Migration("20221014175849_trophyWithTeamTable2")]
+    partial class trophyWithTeamTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

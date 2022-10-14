@@ -6,8 +6,12 @@ namespace testapp3.Repositories.Interfaces
     {
         public long AddTrophy(ETrophy eTrophy);
 
-        public long PlayerRequestTrophy(EPlayerWithTrophy playerWithTrophy);
+        public long AddPlayerRequestTrophy(EPlayerWithTrophy playerWithTrophy);
 
         public ETrophy GetTrophyById(long id);
+
+        public long AddTrophyWithTeam(ETrophyWithTeam trophyWithTeam);
+
+        public long UpdateTrophyWithTeam(ETrophyWithTeam trophyWithTeam);
     }
 }
