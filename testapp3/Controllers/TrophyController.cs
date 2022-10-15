@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using testapp3.Payloads;
 using testapp3.Services.InterFaces;
 
@@ -21,7 +22,13 @@ namespace testapp3.Controllers
         {
             return trophy.AddTrophy(trophyPayload);
         }
-        
+
+        [HttpGet("getAllActiveTrophies")]
+        public List<TrophyPayload> GetAllActiveTrophies()
+        {
+            return trophy.GetAllActiveTrophies();
+        }
+
         [HttpPost("playerTrophyRequest")]
         public DefaultResponse PlayerRequestTrophy([FromBody]PlayerRequestTrophyPayload playerRequest)
         {

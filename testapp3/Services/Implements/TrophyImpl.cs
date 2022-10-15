@@ -1,4 +1,5 @@
-﻿using testapp3.Modals.Entity;
+﻿using System.Collections.Generic;
+using testapp3.Modals.Entity;
 using testapp3.Payloads;
 using testapp3.Repositories.Interfaces;
 using testapp3.Services.InterFaces;
@@ -14,6 +15,7 @@ namespace testapp3.Services.Implements
         EPlayer ePlayer=new EPlayer();
         ETrophyWithTeam etrophyWithTeam=new ETrophyWithTeam();
         EPlayerWithTrophy ePlayerWithTrophy = new EPlayerWithTrophy();
+        TrophyPayload tPayload = new TrophyPayload();
         DefaultResponse defaultResponse= new DefaultResponse();
 
         public TrophyImpl(ITrophyRepo trophyRepo, IPlayerRepo playerRepo,ITeamRepo teamRepo)
@@ -33,6 +35,19 @@ namespace testapp3.Services.Implements
             else
             {
                 return defaultResponse.setResponse(0, "<Internal server error> Trophy not saved, Somthing Went wrong, try again later",false);
+            }
+        }
+
+        public List<TrophyPayload> GetAllActiveTrophies()
+        {
+            List<ETrophy> trophylist= trophyRepo.GetAllActiveTrophyList();
+            if(trophylist.Count > 0)
+            {
+                return tPayload.SetTrophyList(trophylist);
+            }
+            else
+            {
+                return null;
             }
         }
 

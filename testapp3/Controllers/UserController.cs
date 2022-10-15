@@ -46,5 +46,11 @@ namespace testapp3.Controllers
         {
             return user.addPleyer(player);
         }
+
+        [HttpPost("login")]
+        public LoginResponse Login([FromBody]LoginRequest request)
+        {
+            return null;
+        }
     }
 }
