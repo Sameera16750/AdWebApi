@@ -6,5 +6,7 @@ namespace testapp3.Repositories.Interfaces
     {
         public long AddTeam(ETeam team);
         public ETeam GetTeamById(long id);
+        public ETeamOwner GetOwnerById(long id);
+        public ETeamOwner GetOwnerByUser(EUser user);
     }
 }

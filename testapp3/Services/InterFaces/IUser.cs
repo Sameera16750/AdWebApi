@@ -11,5 +11,6 @@ namespace testapp3.Services.InterFaces
         public DefaultResponse addUserDetails(UserPayload userDetails);
         public DefaultResponse addTeamOwner(TeamOwnerPayload teamOwner);
         public DefaultResponse addPleyer(PlayerPayload player);
+        public LoginResponse login(LoginRequest request);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using testapp3.Modals.DBAuth;
@@ -65,6 +67,19 @@ namespace testapp3.Repositories.Implements
         public EUserTypes getUsertypeById(long id)
         {
             return _authContext.userTypes.Find(id);
+        }
+
+        public EUser UserDetails(string uname, string pw)
+        {
+            try
+            {
+                return _authContext.users.Include(u => u.type).Where(u => u.name == uname && u.password == pw).First();
+            }
+            catch (InvalidOperationException e)
+            {
+                return null;
+            }
+            
         }
     }
 }

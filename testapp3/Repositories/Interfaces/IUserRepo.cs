@@ -13,5 +13,6 @@ namespace testapp3.Repositories.Interfaces
         public EUser GetUserById(long id);
         public long AddTeamOwner(ETeamOwner owner);
         public long AddPlayer(EPlayer player);
+        public EUser UserDetails(string uname, string pw);
     }
 }

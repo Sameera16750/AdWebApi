@@ -50,7 +50,7 @@ namespace testapp3.Controllers
         [HttpPost("login")]
         public LoginResponse Login([FromBody]LoginRequest request)
         {
-            return null;
+            return user.login(request);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace testapp3.Services.Implements
         EPlayer ePlayer=new EPlayer();
         DefaultResponse defaultResponse=new DefaultResponse();
         UserTypePayload uTypePayload=new UserTypePayload();
+        LoginResponse loginResponse=new LoginResponse();
 
         public UserImpl(IUserRepo userRepo,ITeam team,ITeamRepo teamRepo)
         {
@@ -135,6 +136,20 @@ namespace testapp3.Services.Implements
             else
             {
                 return null;
+            }
+        }
+
+        public LoginResponse login(LoginRequest request)
+        {
+            EUser user = userRepo.UserDetails(request.UserName, request.Password);
+            if( user!= null)
+            {
+                return loginResponse.setLoginResponse(defaultResponse.setResponse(user.id,user.name,true),uTypePayload.setUserTypeDetail(user.type));
+            }
+            else
+            {
+                return loginResponse.setLoginResponse(defaultResponse.
+                    setResponse(0,"Incorrect User name Or Password Please Check User Name Or password",false),null);
             }
         }
     }

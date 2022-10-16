@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using testapp3.Modals.Entity;
 
 namespace testapp3.Payloads
 {
@@ -19,6 +20,17 @@ namespace testapp3.Payloads
             this.createdDate = createdDate;
             this.lastUpdate = lastUpdate;
             this.status = status;
+        }
+
+        public TeamPayload setTeamPayloadDetails(ETeam eTeam)
+        {
+            TeamPayload team = new TeamPayload();
+            team.id = eTeam.id;
+            team.name = eTeam.name;
+            team.createdDate = eTeam.createdDate;
+            team.lastUpdate = eTeam.lastUpdate;
+            team.status = eTeam.status;
+            return team;
         }
     }
 }
