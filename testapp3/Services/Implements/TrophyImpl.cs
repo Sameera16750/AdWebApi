@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using testapp3.Modals.Entity;
 using testapp3.Payloads;
 using testapp3.Repositories.Interfaces;
@@ -16,6 +17,11 @@ namespace testapp3.Services.Implements
         ETrophyWithTeam etrophyWithTeam=new ETrophyWithTeam();
         EPlayerWithTrophy ePlayerWithTrophy = new EPlayerWithTrophy();
         TrophyPayload tPayload = new TrophyPayload();
+        TrophyWithTeamPayload trophyWithTeamPayload = new TrophyWithTeamPayload();
+        TeamPayload teamPayload= new TeamPayload();
+        TeamOwnerPayload teamOwner = new TeamOwnerPayload();
+        UserPayload userPayload=new UserPayload();
+        AppliedTeamDetailsForTrophiesPayload appliedTeamDetails= new AppliedTeamDetailsForTrophiesPayload();
         DefaultResponse defaultResponse= new DefaultResponse();
 
         public TrophyImpl(ITrophyRepo trophyRepo, IPlayerRepo playerRepo,ITeamRepo teamRepo)
@@ -48,6 +54,32 @@ namespace testapp3.Services.Implements
             else
             {
                 return null;
+            }
+        }
+
+        public List<AppliedTeamDetailsForTrophiesPayload> GetAllAppliedTeamsWithTrophies()
+        {
+            List<ETrophyWithTeam>trophyWithTeams=trophyRepo.getAllActiveTrophiesWithTeams();
+            List<AppliedTeamDetailsForTrophiesPayload>appliedTeams=new List<AppliedTeamDetailsForTrophiesPayload>();
+            Console.Write(trophyWithTeams[0]);
+            if(trophyWithTeams.Count > 0)
+            {
+                for(int i = 0; i < trophyWithTeams.Count; i++)
+                {
+                    ETeamOwner eTeamOwner = teamRepo.GetOwnerByTeam(trophyWithTeams[i].team);
+                    AppliedTeamDetailsForTrophiesPayload applied= appliedTeamDetails.setDetails(teamPayload.setTeamPayloadDetails(trophyWithTeams[i].team),
+                        teamOwner.setDetails(eTeamOwner, teamPayload.setTeamPayloadDetails(trophyWithTeams[i].team),
+                        userPayload.setDetails(eTeamOwner.user)),
+                        trophyWithTeamPayload.setDetails(trophyWithTeams[i]));
+                    appliedTeams.Add(applied);
+                }
+                    
+                return appliedTeams;
+            }
+            else
+            {
+                return null;
+
             }
         }
 

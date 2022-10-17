@@ -25,5 +25,18 @@ namespace testapp3.Payloads
             this.lastUpdate = lastUpdate;
             this.status = status;
         }
+
+        public TrophyWithTeamPayload setDetails(ETrophyWithTeam eTrophyWithTeam)
+        {
+            TrophyWithTeamPayload trophyWithTeam = new TrophyWithTeamPayload();
+            trophyWithTeam.id = eTrophyWithTeam.id;
+            trophyWithTeam.trophyId=eTrophyWithTeam.trophy.id;
+            trophyWithTeam.teamId = eTrophyWithTeam.team.id;
+            trophyWithTeam.maxPrice = eTrophyWithTeam.maxPrice;
+            trophyWithTeam.createdDate = eTrophyWithTeam.createdDate;
+            trophyWithTeam.lastUpdate = eTrophyWithTeam.lastUpdate;
+            trophyWithTeam.status = eTrophyWithTeam.status;
+            return trophyWithTeam;
+        }
     }
 }

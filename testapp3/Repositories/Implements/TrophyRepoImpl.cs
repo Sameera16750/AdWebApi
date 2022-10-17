@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using testapp3.Modals.DBAuth;
 using testapp3.Modals.Entity;
@@ -51,6 +52,11 @@ namespace testapp3.Repositories.Implements
         public List<ETrophy> GetAllActiveTrophyList()
         {
             return _authContext.trophies.Where(t => t.status == 1).ToList();
+        }
+
+        public List<ETrophyWithTeam> getAllActiveTrophiesWithTeams()
+        {
+            return _authContext.trophyWithTeams.Include(t=>t.team).Include(t=>t.trophy).Where(t => t.status > 0).ToList();
         }
     }
 }

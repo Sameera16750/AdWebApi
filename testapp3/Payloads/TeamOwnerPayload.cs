@@ -37,5 +37,25 @@ namespace testapp3.Payloads
             this.lastUpdate = lastUpdate;
             this.status = status;
         }
+
+        public TeamOwnerPayload setDetails(ETeamOwner eTeamOwner, TeamPayload teamPayload,UserPayload userPayload)
+        {
+            TeamOwnerPayload teamOwnerPayload=new TeamOwnerPayload();
+            teamOwnerPayload.id = eTeamOwner.id;
+            teamOwnerPayload.name = eTeamOwner.name;
+            teamOwnerPayload.contactNo = eTeamOwner.contactNo;
+            teamOwnerPayload.email = eTeamOwner.email;
+            teamOwnerPayload.age = eTeamOwner.age;
+            teamOwnerPayload.gender = eTeamOwner.gender;
+            teamOwnerPayload.address = eTeamOwner.address;
+            teamOwnerPayload.nic = eTeamOwner.nic;
+            teamOwnerPayload.team = teamPayload;
+            teamOwnerPayload.user = userPayload;
+            teamOwnerPayload.createddate = eTeamOwner.createddate;
+            teamOwnerPayload.lastUpdate = eTeamOwner.lastUpdate;
+            teamOwnerPayload.status = status;
+
+            return teamOwnerPayload;
+        }
     }
 }

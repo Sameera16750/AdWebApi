@@ -46,5 +46,11 @@ namespace testapp3.Controllers
         {
             return trophy.UpdateOwnerRequestTrophy(trophyWithTeam);
         }
+
+        [HttpGet("getAllTeamAppliedTrophyDetails")]
+        public List<AppliedTeamDetailsForTrophiesPayload> getAllAppliedTeamsWithtrophies()
+        {
+            return trophy.GetAllAppliedTeamsWithTrophies();
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace testapp3.Services.InterFaces
         public DefaultResponse OwnerRequestTrophy(TrophyWithTeamPayload trophyWithTeam);
 
         public DefaultResponse UpdateOwnerRequestTrophy(TrophyWithTeamPayload trophyWithTeam);
+
+        public List<AppliedTeamDetailsForTrophiesPayload> GetAllAppliedTeamsWithTrophies();
     }
 }

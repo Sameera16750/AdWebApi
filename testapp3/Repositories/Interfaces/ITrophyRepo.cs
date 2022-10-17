@@ -16,5 +16,7 @@ namespace testapp3.Repositories.Interfaces
         public long AddTrophyWithTeam(ETrophyWithTeam trophyWithTeam);
 
         public long UpdateTrophyWithTeam(ETrophyWithTeam trophyWithTeam);
+
+        public List<ETrophyWithTeam> getAllActiveTrophiesWithTeams();
     }
 }

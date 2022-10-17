@@ -35,6 +35,18 @@ namespace testapp3.Repositories.Implements
 
         }
 
+        public ETeamOwner GetOwnerByTeam(ETeam team)
+        {
+            try
+            {
+                return _authContext.teamOwners.Include(O=>O.team).Include(O=>O.user).Include(O=>O.user.type).Where(O => O.team == team).First();
+
+            }catch(InvalidOperationException e)
+            {
+                return null;
+            }
+        }
+
         public ETeamOwner GetOwnerByUser(EUser user)
         {
             try
