@@ -12,23 +12,27 @@ namespace testapp3.Services.Implements
         ITrophyRepo trophyRepo;
         IPlayerRepo playerRepo;
         ITeamRepo teamRepo;
+        IBiddingRepo biddingRepo;
         ETrophy eTrophy=new ETrophy();
         EPlayer ePlayer=new EPlayer();
         ETrophyWithTeam etrophyWithTeam=new ETrophyWithTeam();
         EPlayerWithTrophy ePlayerWithTrophy = new EPlayerWithTrophy();
+        EBidding eBidding = new EBidding();
         TrophyPayload tPayload = new TrophyPayload();
         TrophyWithTeamPayload trophyWithTeamPayload = new TrophyWithTeamPayload();
         TeamPayload teamPayload= new TeamPayload();
         TeamOwnerPayload teamOwner = new TeamOwnerPayload();
         UserPayload userPayload=new UserPayload();
         AppliedTeamDetailsForTrophiesPayload appliedTeamDetails= new AppliedTeamDetailsForTrophiesPayload();
+        BiddingPayload biddingPayload = new BiddingPayload();
         DefaultResponse defaultResponse= new DefaultResponse();
 
-        public TrophyImpl(ITrophyRepo trophyRepo, IPlayerRepo playerRepo,ITeamRepo teamRepo)
+        public TrophyImpl(ITrophyRepo trophyRepo, IPlayerRepo playerRepo,ITeamRepo teamRepo,IBiddingRepo biddingRepo)
         {
             this.trophyRepo = trophyRepo;
             this.playerRepo = playerRepo;
             this.teamRepo=teamRepo;
+            this.biddingRepo = biddingRepo;
         }
 
         public DefaultResponse AddTrophy(TrophyPayload trophyPayload)
@@ -83,6 +87,19 @@ namespace testapp3.Services.Implements
             }
         }
 
+        public TrophyPayload GetTrophyById(long id)
+        {
+            ETrophy selectedTrophy = trophyRepo.GetTrophyById(id);
+            if(selectedTrophy != null)
+            {
+                return tPayload.SetTrophyPayloadDetails(selectedTrophy);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public DefaultResponse OwnerRequestTrophy(TrophyWithTeamPayload trophyWithTeam)
         {
 
@@ -103,13 +120,35 @@ namespace testapp3.Services.Implements
 
             long savedRequestId = trophyRepo.AddPlayerRequestTrophy(ePlayerWithTrophy.setPlayerWithTrophyDetails(playerRequest, playerRepo.
                 GetPlayerById(playerRequest.playerId), trophyRepo.GetTrophyById(playerRequest.trophyId)));
-            if(savedRequestId > 0)
+            if( savedRequestId > 0)
             {
-                return defaultResponse.setResponse(savedRequestId, "Applying success 🎉🎉🎉", true);
+                BiddingPayload bidding = new BiddingPayload();
+                bidding.id = 0;
+                bidding.player = playerRequest;
+                bidding.lastBidderId = 0;
+                bidding.startingPrice = 0;
+                bidding.endPrice = 0;
+                bidding.createdDate = playerRequest.createdDate;
+                bidding.lastUpdate=playerRequest.lastUpdate;
+                bidding.status = 1;
+
+                EBidding meBidding = eBidding.setBiddingDetails(trophyRepo.
+                    getPlayerWithTrophyById(savedRequestId), bidding);
+                Console.WriteLine(meBidding);
+                long savedBiddingId = biddingRepo.addBiddingRecord(meBidding);
+                if (savedBiddingId> 0)
+                {
+                    return defaultResponse.setResponse(savedRequestId, "Applying success 🎉🎉🎉", true);
+                }
+                else
+                {
+                    return defaultResponse.setResponse(0, "<Internal server Error >applying fail, Somthing went wrong please try again later", false);
+                }
             }
             else
             {
-                return defaultResponse.setResponse(0, "<Internal server Error >applying fail, Somthing went wrong please try again later",false);
+                return defaultResponse.setResponse(0, "<Internal server Error >applying fail, Somthing went wrong please try again later", false);
+
             }
         }
 

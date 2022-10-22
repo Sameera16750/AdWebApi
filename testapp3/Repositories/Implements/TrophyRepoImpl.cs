@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using testapp3.Modals.DBAuth;
@@ -57,6 +58,18 @@ namespace testapp3.Repositories.Implements
         public List<ETrophyWithTeam> getAllActiveTrophiesWithTeams()
         {
             return _authContext.trophyWithTeams.Include(t=>t.team).Include(t=>t.trophy).Where(t => t.status > 0).ToList();
+        }
+
+        public EPlayerWithTrophy getPlayerWithTrophyById(long id)
+        {
+            try
+            {
+                return _authContext.playerWithTrophies.Where(p => p.id == id).First();
+            }
+            catch(InvalidOperationException e)
+            {
+                return null;
+            }
         }
     }
 }

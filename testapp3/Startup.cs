@@ -51,6 +51,9 @@ namespace testapp3
 
             services.AddTransient<IPlayer,PlayerImpl>();
             services.AddTransient<IPlayerRepo, PlayerRepoImpl>();
+
+            services.AddTransient<IBiddingRepo,BiddingRepoImpl>();
+            services.AddTransient<IBidding, BiddingImpl>();
             //end of dependency injection
 
             services.AddControllers();

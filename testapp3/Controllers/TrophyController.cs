@@ -11,10 +11,11 @@ namespace testapp3.Controllers
     public class TrophyController : ControllerBase
     {
         private readonly ITrophy trophy;
-
-        public TrophyController(ITrophy trophy)
+        private readonly IBidding bidding;
+        public TrophyController(ITrophy trophy, IBidding bidding)
         {
             this.trophy = trophy;
+            this.bidding = bidding;
         }
 
         [HttpPost("addTrophy")]
@@ -51,6 +52,18 @@ namespace testapp3.Controllers
         public List<AppliedTeamDetailsForTrophiesPayload> getAllAppliedTeamsWithtrophies()
         {
             return trophy.GetAllAppliedTeamsWithTrophies();
+        }
+
+        [HttpGet("getTrophyById")]
+        public TrophyPayload getTrophyById(long id)
+        {
+            return trophy.GetTrophyById(id);
+        }
+
+        [HttpPost("updateBiddingData")]
+        public DefaultResponse UpdateBiddiData(BiddingPayload biddingPayload)
+        {
+            return bidding.updateBiddingRecord(biddingPayload);
         }
     }
 }

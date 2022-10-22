@@ -39,5 +39,26 @@ namespace testapp3.Payloads
             this.lastUpdate = lastUpdate;
             this.status = status;
         }
+
+        public PlayerPayload setDetails(EPlayer ePlayer, UserPayload userPayload)
+        {
+            PlayerPayload player = new PlayerPayload();
+            player.id=ePlayer.id;
+            player.name=ePlayer.name;
+            player.age=ePlayer.age;
+            player.gender=ePlayer.gender;
+            player.height=ePlayer.height;
+            player.weight=ePlayer.weight;
+            player.contactNo=ePlayer.contactNo;
+            player.address=ePlayer.address;
+            player.email=ePlayer.email;
+            player.nic=ePlayer.nic;
+            player.user = userPayload;
+            player.createddate=ePlayer.createddate;
+            player.lastUpdate=ePlayer.lastUpdate;
+            player.status = ePlayer.status;
+            return player;
+
+        }
     }
 }
